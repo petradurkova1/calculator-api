@@ -1,0 +1,8 @@
+{
+  "name": "calculator-api-tests",
+  "version": "1.0.0",
+  "description": "API tests for Calculator API",
+  "scripts": {
+    "test": "newman run tests/Calculator_API_Tests.postman_collection.json"
+  }
+}
