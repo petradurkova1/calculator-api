@@ -26,12 +26,21 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Start FastAPI server
-        run: |
-          python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 > server.log 2>&1 &
-          sleep 3
-          curl --fail --retry 10 --retry-delay 1 http://127.0.0.1:8000/health
-          
+      - - name: Start FastAPI server
+          run: |
+            python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 > server.log 2>&1 &
+            SERVER_PID=$!
+            sleep 5
+
+            echo "=== Server process ==="
+            ps -p $SERVER_PID || true
+
+            echo "=== Server log ==="
+            cat server.log
+
+            echo "=== Health check ==="
+            curl --fail http://127.0.0.1:8000/health
+
       - name: Show server log
         if: failure()
         run: cat server.log
