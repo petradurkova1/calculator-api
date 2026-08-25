@@ -25,24 +25,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          
-      - name: Start FastAPI server
-          run: |
-            uvicorn app.main:app --host 127.0.0.1 --port 8000 > server.log 2>&1 &
-            sleep 10
-
-            echo "=== Server process ==="
-            ps -p $SERVER_PID || true
-
-            echo "=== Server log ==="
-            cat server.log
-
-            echo "=== Health check ==="
-            curl --fail http://127.0.0.1:8000/health
-
-      - name: Show server log
-        if: failure()
-        run: cat server.log
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -52,5 +34,14 @@ jobs:
       - name: Install Newman
         run: npm install -g newman
 
-      - name: Run API tests
-        run: npm test
+      - name: Start API and run tests
+        run: |
+          python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 > server.log 2>&1 &
+          
+          sleep 3
+          
+          echo "=== FastAPI health check ==="
+          curl --fail --retry 10 --retry-delay 1 http://127.0.0.1:8000/health
+          
+          echo "=== Running Newman tests ==="
+          npm test
