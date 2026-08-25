@@ -37,11 +37,18 @@ jobs:
       - name: Start API and run tests
         run: |
           python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 > server.log 2>&1 &
-          
+          SERVER_PID=$!
+
           sleep 3
-          
+
+          echo "=== Server process ==="
+          ps -p $SERVER_PID || true
+
+          echo "=== Server log ==="
+          cat server.log
+
           echo "=== FastAPI health check ==="
           curl --fail --retry 10 --retry-delay 1 http://127.0.0.1:8000/health
-          
+
           echo "=== Running Newman tests ==="
           npm test
