@@ -59,14 +59,16 @@ jobs:
           newman run tests/Calculator_API_Tests.postman_collection.json \
             -e environments/Test_Environment.postman_environment.json \
             -r cli,htmlextra \
-            --reporter-htmlextra-export reports/main-api-report.html
+            --reporter-htmlextra-export reports/main-api-report.html \
+            --bail
 
           echo "=== Running data-driven Newman tests ==="
           newman run tests/Calculator_Data_Driven_Tests.postman_collection.json \
             -e environments/Test_Environment.postman_environment.json \
             -d data/add-test-data.csv \
             -r cli,htmlextra \
-            --reporter-htmlextra-export reports/data-driven-report.html
+            --reporter-htmlextra-export reports/data-driven-report.html \
+            --bail
 
       - name: Upload Newman reports
         if: always()
