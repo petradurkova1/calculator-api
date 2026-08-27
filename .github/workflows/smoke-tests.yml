@@ -1,0 +1,72 @@
+name: Smoke Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  smoke-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install Newman and HTML reporter
+        run: |
+          npm install -g newman
+          npm install -g newman-reporter-htmlextra
+
+      - name: Create reports directory
+        run: mkdir -p reports
+
+      - name: Start API
+        run: |
+          python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 > server.log 2>&1 &
+          SERVER_PID=$!
+
+          sleep 3
+
+          echo "=== Server process ==="
+          ps -p $SERVER_PID || true
+
+          echo "=== Server log ==="
+          cat server.log
+
+          echo "=== FastAPI health check ==="
+          curl --fail --retry 10 --retry-delay 1 http://127.0.0.1:8000/health
+
+      - name: Run Smoke tests
+        run: |
+          newman run tests/Calculator_API_Tests.postman_collection.json \
+            -e environments/Test_Environment.postman_environment.json \
+            --folder Smoke \
+            -r cli,htmlextra \
+            --reporter-htmlextra-export reports/smoke-report.html \
+            --bail
+
+      - name: Upload Smoke report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-test-report
+          path: reports/
