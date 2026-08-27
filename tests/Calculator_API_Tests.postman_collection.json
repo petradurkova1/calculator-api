@@ -31,8 +31,12 @@
         {
           "listen": "prerequest",
           "script": {
-            "exec": [],
-            "type": "text/javascript"
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
           }
         }
       ],
@@ -40,15 +44,10 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://127.0.0.1:8000/health",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/health",
           "host": [
-            "127",
-            "0",
-            "0",
-            "1"
+            "{{baseUrl}}"
           ],
-          "port": "8000",
           "path": [
             "health"
           ]
@@ -62,15 +61,10 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://127.0.0.1:8000/healthxxx",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/healthxxx",
           "host": [
-            "127",
-            "0",
-            "0",
-            "1"
+            "{{baseUrl}}"
           ],
-          "port": "8000",
           "path": [
             "healthxxx"
           ]
@@ -102,8 +96,12 @@
         {
           "listen": "prerequest",
           "script": {
-            "exec": [],
-            "type": "text/javascript"
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
           }
         }
       ],
@@ -111,15 +109,10 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://127.0.0.1:8000/calculate/add?a=10&b=5",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/calculate/add?a=10&b=5",
           "host": [
-            "127",
-            "0",
-            "0",
-            "1"
+            "{{baseUrl}}"
           ],
-          "port": "8000",
           "path": [
             "calculate",
             "add"
@@ -162,8 +155,12 @@
         {
           "listen": "prerequest",
           "script": {
-            "exec": [],
-            "type": "text/javascript"
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
           }
         }
       ],
@@ -171,15 +168,10 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://127.0.0.1:8000/calculate/add?a=abc&b=5",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/calculate/add?a=abc&b=5",
           "host": [
-            "127",
-            "0",
-            "0",
-            "1"
+            "{{baseUrl}}"
           ],
-          "port": "8000",
           "path": [
             "calculate",
             "add"
@@ -204,15 +196,10 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://127.0.0.1:8000/calculate/divide?a=10&b=2",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/calculate/divide?a=10&b=2",
           "host": [
-            "127",
-            "0",
-            "0",
-            "1"
+            "{{baseUrl}}"
           ],
-          "port": "8000",
           "path": [
             "calculate",
             "divide"
@@ -257,8 +244,12 @@
         {
           "listen": "prerequest",
           "script": {
-            "exec": [],
-            "type": "text/javascript"
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
           }
         }
       ],
@@ -266,15 +257,10 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://127.0.0.1:8000/calculate/divide?a=10&b=0",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/calculate/divide?a=10&b=0",
           "host": [
-            "127",
-            "0",
-            "0",
-            "1"
+            "{{baseUrl}}"
           ],
-          "port": "8000",
           "path": [
             "calculate",
             "divide"
@@ -317,8 +303,12 @@
         {
           "listen": "prerequest",
           "script": {
-            "exec": [],
-            "type": "text/javascript"
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
           }
         }
       ],
@@ -326,15 +316,10 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://127.0.0.1:8000/calculate/add?a=0&b=5",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/calculate/add?a=0&b=5",
           "host": [
-            "127",
-            "0",
-            "0",
-            "1"
+            "{{baseUrl}}"
           ],
-          "port": "8000",
           "path": [
             "calculate",
             "add"
@@ -377,8 +362,12 @@
         {
           "listen": "prerequest",
           "script": {
-            "exec": [],
-            "type": "text/javascript"
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
           }
         }
       ],
@@ -386,15 +375,10 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://127.0.0.1:8000/calculate/add?a=-10&b=5",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/calculate/add?a=-10&b=5",
           "host": [
-            "127",
-            "0",
-            "0",
-            "1"
+            "{{baseUrl}}"
           ],
-          "port": "8000",
           "path": [
             "calculate",
             "add"
@@ -437,8 +421,12 @@
         {
           "listen": "prerequest",
           "script": {
-            "exec": [],
-            "type": "text/javascript"
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
           }
         }
       ],
@@ -446,15 +434,10 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://127.0.0.1:8000/calculate/add?a=2.5&b=1.5",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/calculate/add?a=2.5&b=1.5",
           "host": [
-            "127",
-            "0",
-            "0",
-            "1"
+            "{{baseUrl}}"
           ],
-          "port": "8000",
           "path": [
             "calculate",
             "add"
@@ -527,15 +510,10 @@
           }
         },
         "url": {
-          "raw": "http://127.0.0.1:8000/calculations",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/calculations",
           "host": [
-            "127",
-            "0",
-            "0",
-            "1"
+            "{{baseUrl}}"
           ],
-          "port": "8000",
           "path": [
             "calculations"
           ]
@@ -567,8 +545,12 @@
         {
           "listen": "prerequest",
           "script": {
-            "exec": [],
-            "type": "text/javascript"
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
           }
         }
       ],
@@ -585,15 +567,10 @@
           }
         },
         "url": {
-          "raw": "http://127.0.0.1:8000/calculations",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/calculations",
           "host": [
-            "127",
-            "0",
-            "0",
-            "1"
+            "{{baseUrl}}"
           ],
-          "port": "8000",
           "path": [
             "calculations"
           ]
@@ -625,8 +602,12 @@
         {
           "listen": "prerequest",
           "script": {
-            "exec": [],
-            "type": "text/javascript"
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
           }
         }
       ],
@@ -643,15 +624,10 @@
           }
         },
         "url": {
-          "raw": "http://127.0.0.1:8000/calculations",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/calculations",
           "host": [
-            "127",
-            "0",
-            "0",
-            "1"
+            "{{baseUrl}}"
           ],
-          "port": "8000",
           "path": [
             "calculations"
           ]
@@ -719,15 +695,10 @@
           }
         },
         "url": {
-          "raw": "http://127.0.0.1:8000/calculations",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/calculations",
           "host": [
-            "127",
-            "0",
-            "0",
-            "1"
+            "{{baseUrl}}"
           ],
-          "port": "8000",
           "path": [
             "calculations"
           ]
@@ -832,8 +803,12 @@
         {
           "listen": "prerequest",
           "script": {
-            "exec": [],
-            "type": "text/javascript"
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
           }
         }
       ],
@@ -841,15 +816,10 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://127.0.0.1:8000/calculations/999",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/calculations/999",
           "host": [
-            "127",
-            "0",
-            "0",
-            "1"
+            "{{baseUrl}}"
           ],
-          "port": "8000",
           "path": [
             "calculations",
             "999"
@@ -923,15 +893,10 @@
           }
         },
         "url": {
-          "raw": "http://127.0.0.1:8000/calculations/{{calculationId}}",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/calculations/{{calculationId}}",
           "host": [
-            "127",
-            "0",
-            "0",
-            "1"
+            "{{baseUrl}}"
           ],
-          "port": "8000",
           "path": [
             "calculations",
             "{{calculationId}}"
@@ -964,8 +929,12 @@
         {
           "listen": "prerequest",
           "script": {
-            "exec": [],
-            "type": "text/javascript"
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
           }
         }
       ],
@@ -982,15 +951,10 @@
           }
         },
         "url": {
-          "raw": "http://127.0.0.1:8000/calculations/999",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/calculations/999",
           "host": [
-            "127",
-            "0",
-            "0",
-            "1"
+            "{{baseUrl}}"
           ],
-          "port": "8000",
           "path": [
             "calculations",
             "999"
@@ -1023,8 +987,12 @@
         {
           "listen": "prerequest",
           "script": {
-            "exec": [],
-            "type": "text/javascript"
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
           }
         }
       ],
@@ -1041,15 +1009,10 @@
           }
         },
         "url": {
-          "raw": "http://127.0.0.1:8000/calculations/{{calculationId}}",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/calculations/{{calculationId}}",
           "host": [
-            "127",
-            "0",
-            "0",
-            "1"
+            "{{baseUrl}}"
           ],
-          "port": "8000",
           "path": [
             "calculations",
             "{{calculationId}}"
@@ -1082,8 +1045,12 @@
         {
           "listen": "prerequest",
           "script": {
-            "exec": [],
-            "type": "text/javascript"
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
           }
         }
       ],
@@ -1100,15 +1067,10 @@
           }
         },
         "url": {
-          "raw": "http://127.0.0.1:8000/calculations/{{calculationId}}",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/calculations/{{calculationId}}",
           "host": [
-            "127",
-            "0",
-            "0",
-            "1"
+            "{{baseUrl}}"
           ],
-          "port": "8000",
           "path": [
             "calculations",
             "{{calculationId}}"
@@ -1173,15 +1135,10 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://127.0.0.1:8000/calculations/{{calculationId}}",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/calculations/{{calculationId}}",
           "host": [
-            "127",
-            "0",
-            "0",
-            "1"
+            "{{baseUrl}}"
           ],
-          "port": "8000",
           "path": [
             "calculations",
             "{{calculationId}}"
@@ -1233,8 +1190,12 @@
         {
           "listen": "prerequest",
           "script": {
-            "exec": [],
-            "type": "text/javascript"
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
           }
         }
       ],
@@ -1251,15 +1212,10 @@
           }
         },
         "url": {
-          "raw": "http://127.0.0.1:8000/calculations/{{calculationId}}",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/calculations/{{calculationId}}",
           "host": [
-            "127",
-            "0",
-            "0",
-            "1"
+            "{{baseUrl}}"
           ],
-          "port": "8000",
           "path": [
             "calculations",
             "{{calculationId}}"
@@ -1313,15 +1269,10 @@
           }
         },
         "url": {
-          "raw": "http://127.0.0.1:8000/calculations",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/calculations",
           "host": [
-            "127",
-            "0",
-            "0",
-            "1"
+            "{{baseUrl}}"
           ],
-          "port": "8000",
           "path": [
             "calculations"
           ]
@@ -1372,8 +1323,12 @@
         {
           "listen": "prerequest",
           "script": {
-            "exec": [],
-            "type": "text/javascript"
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
           }
         }
       ],
@@ -1390,15 +1345,10 @@
           }
         },
         "url": {
-          "raw": "http://127.0.0.1:8000/calculations/{{calculationId}}",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/calculations/{{calculationId}}",
           "host": [
-            "127",
-            "0",
-            "0",
-            "1"
+            "{{baseUrl}}"
           ],
-          "port": "8000",
           "path": [
             "calculations",
             "{{calculationId}}"
@@ -1450,8 +1400,12 @@
         {
           "listen": "prerequest",
           "script": {
-            "exec": [],
-            "type": "text/javascript"
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
           }
         }
       ],
@@ -1468,15 +1422,10 @@
           }
         },
         "url": {
-          "raw": "http://127.0.0.1:8000/calculations/{{calculationId}}",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/calculations/{{calculationId}}",
           "host": [
-            "127",
-            "0",
-            "0",
-            "1"
+            "{{baseUrl}}"
           ],
-          "port": "8000",
           "path": [
             "calculations",
             "{{calculationId}}"
@@ -1528,8 +1477,12 @@
         {
           "listen": "prerequest",
           "script": {
-            "exec": [],
-            "type": "text/javascript"
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
           }
         }
       ],
@@ -1546,15 +1499,10 @@
           }
         },
         "url": {
-          "raw": "http://127.0.0.1:8000/calculations/{{calculationId}}",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/calculations/{{calculationId}}",
           "host": [
-            "127",
-            "0",
-            "0",
-            "1"
+            "{{baseUrl}}"
           ],
-          "port": "8000",
           "path": [
             "calculations",
             "{{calculationId}}"
@@ -1590,8 +1538,12 @@
         {
           "listen": "prerequest",
           "script": {
-            "exec": [],
-            "type": "text/javascript"
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
           }
         }
       ],
@@ -1608,15 +1560,10 @@
           }
         },
         "url": {
-          "raw": "http://127.0.0.1:8000/calculations/{{calculationId}}",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/calculations/{{calculationId}}",
           "host": [
-            "127",
-            "0",
-            "0",
-            "1"
+            "{{baseUrl}}"
           ],
-          "port": "8000",
           "path": [
             "calculations",
             "{{calculationId}}"
@@ -1652,8 +1599,12 @@
         {
           "listen": "prerequest",
           "script": {
-            "exec": [],
-            "type": "text/javascript"
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
           }
         }
       ],
@@ -1670,18 +1621,74 @@
           }
         },
         "url": {
-          "raw": "http://127.0.0.1:8000/calculations/{{calculationId}}",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/calculations/{{calculationId}}",
           "host": [
-            "127",
-            "0",
-            "0",
-            "1"
+            "{{baseUrl}}"
           ],
-          "port": "8000",
           "path": [
             "calculations",
             "{{calculationId}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Non-existent Calculation",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 404\", function () {\r",
+              "    pm.response.to.have.status(404);\r",
+              "});\r",
+              "\r",
+              "const jsonData = pm.response.json();\r",
+              "\r",
+              "pm.test(\"Calculation not found\", function () {\r",
+              "    pm.expect(jsonData.detail).to.eql(\r",
+              "        \"Calculation not found\"\r",
+              "    );\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"a\": 30\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/calculations/999999",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "calculations",
+            "999999"
           ]
         }
       },
@@ -1719,15 +1726,10 @@
         "method": "DELETE",
         "header": [],
         "url": {
-          "raw": "http://127.0.0.1:8000/calculations/{{calculationId}}",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/calculations/{{calculationId}}",
           "host": [
-            "127",
-            "0",
-            "0",
-            "1"
+            "{{baseUrl}}"
           ],
-          "port": "8000",
           "path": [
             "calculations",
             "{{calculationId}}"
@@ -1760,8 +1762,12 @@
         {
           "listen": "prerequest",
           "script": {
-            "exec": [],
-            "type": "text/javascript"
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
           }
         }
       ],
@@ -1769,15 +1775,10 @@
         "method": "DELETE",
         "header": [],
         "url": {
-          "raw": "http://127.0.0.1:8000/calculations/999",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/calculations/999",
           "host": [
-            "127",
-            "0",
-            "0",
-            "1"
+            "{{baseUrl}}"
           ],
-          "port": "8000",
           "path": [
             "calculations",
             "999"
@@ -1810,8 +1811,12 @@
         {
           "listen": "prerequest",
           "script": {
-            "exec": [],
-            "type": "text/javascript"
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
           }
         }
       ],
@@ -1819,80 +1824,13 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://127.0.0.1:8000/calculations/{{calculationId}}",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/calculations/{{calculationId}}",
           "host": [
-            "127",
-            "0",
-            "0",
-            "1"
+            "{{baseUrl}}"
           ],
-          "port": "8000",
           "path": [
             "calculations",
             "{{calculationId}}"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Non-existent Calculation",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Status code is 404\", function () {\r",
-              "    pm.response.to.have.status(404);\r",
-              "});\r",
-              "\r",
-              "const jsonData = pm.response.json();\r",
-              "\r",
-              "pm.test(\"Calculation not found\", function () {\r",
-              "    pm.expect(jsonData.detail).to.eql(\r",
-              "        \"Calculation not found\"\r",
-              "    );\r",
-              "});"
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        },
-        {
-          "listen": "prerequest",
-          "script": {
-            "exec": [],
-            "type": "text/javascript"
-          }
-        }
-      ],
-      "request": {
-        "method": "PATCH",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n  \"a\": 30\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
-        },
-        "url": {
-          "raw": "http://127.0.0.1:8000/calculations/999999",
-          "protocol": "http",
-          "host": [
-            "127",
-            "0",
-            "0",
-            "1"
-          ],
-          "port": "8000",
-          "path": [
-            "calculations",
-            "999999"
           ]
         }
       },
@@ -1926,6 +1864,10 @@
   "variable": [
     {
       "key": "calculationId",
+      "value": ""
+    },
+    {
+      "key": "baseUrl",
       "value": ""
     }
   ]

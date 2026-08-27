@@ -51,8 +51,10 @@ jobs:
           curl --fail --retry 10 --retry-delay 1 http://127.0.0.1:8000/health
 
           echo "=== Running main Newman tests ==="
-          npm test
+          newman run tests/Calculator_API_Tests.postman_collection.json \
+            -e environments/Test_Environment.postman_environment.json
 
           echo "=== Running data-driven Newman tests ==="
           newman run tests/Calculator_Data_Driven_Tests.postman_collection.json \
+            -e environments/Test_Environment.postman_environment.json \
             -d data/add-test-data.csv

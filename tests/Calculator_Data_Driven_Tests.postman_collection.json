@@ -47,15 +47,10 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://127.0.0.1:8000/calculate/add?a={{a}}&b={{b}}",
-          "protocol": "http",
+          "raw": "{{baseUrl}}/calculate/add?a={{a}}&b={{b}}",
           "host": [
-            "127",
-            "0",
-            "0",
-            "1"
+            "{{baseUrl}}"
           ],
-          "port": "8000",
           "path": [
             "calculate",
             "add"
@@ -73,6 +68,44 @@
         }
       },
       "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": ""
+    },
+    {
+      "key": "a",
+      "value": ""
+    },
+    {
+      "key": "b",
+      "value": ""
     }
   ]
 }
