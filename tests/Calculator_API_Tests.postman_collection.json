@@ -8,1833 +8,1843 @@
   },
   "item": [
     {
-      "name": "Health Check",
-      "event": [
+      "name": "Smoke",
+      "item": [
         {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Status code is 200\", function () {\r",
-              "    pm.response.to.have.status(200);\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Response status is OK\", function () {\r",
-              "    const jsonData = pm.response.json();\r",
-              "    pm.expect(jsonData.status).to.eql(\"OK\");\r",
-              "});"
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        },
-        {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              ""
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        }
-      ],
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "{{baseUrl}}/health",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "health"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Wrong URL",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "{{baseUrl}}/healthxxx",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "healthxxx"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Add – positive",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Status code is 200\", function () {\r",
-              "    pm.response.to.have.status(200);\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Result is 15\", function () {\r",
-              "    const jsonData = pm.response.json();\r",
-              "    pm.expect(jsonData.result).to.eql(15);\r",
-              "});"
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        },
-        {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              ""
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        }
-      ],
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "{{baseUrl}}/calculate/add?a=10&b=5",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "calculate",
-            "add"
-          ],
-          "query": [
+          "name": "Health Check",
+          "event": [
             {
-              "key": "a",
-              "value": "10"
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response status is OK\", function () {\r",
+                  "    const jsonData = pm.response.json();\r",
+                  "    pm.expect(jsonData.status).to.eql(\"OK\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
             },
             {
-              "key": "b",
-              "value": "5"
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
             }
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Add – invalid input",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Status code is 422\", function () {\r",
-              "    pm.response.to.have.status(422);\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Validation error is returned\", function () {\r",
-              "    const jsonData = pm.response.json();\r",
-              "    pm.expect(jsonData.detail).to.be.an(\"array\");\r",
-              "});"
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "health"
+              ]
+            }
+          },
+          "response": []
         },
         {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              ""
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        }
-      ],
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "{{baseUrl}}/calculate/add?a=abc&b=5",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "calculate",
-            "add"
-          ],
-          "query": [
+          "name": "Happy path",
+          "event": [
             {
-              "key": "a",
-              "value": "abc"
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 201\", function () {\r",
+                  "    pm.response.to.have.status(201);\r",
+                  "});\r",
+                  "\r",
+                  "const jsonData = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Result is 15\", function () {\r",
+                  "    pm.expect(jsonData.result).to.eql(15);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Operation is add\", function () {\r",
+                  "    pm.expect(jsonData.operation).to.eql(\"add\");\r",
+                  "});\r",
+                  "\r",
+                  "\r",
+                  "pm.collectionVariables.set(\"calculationId\", jsonData.id);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
             },
             {
-              "key": "b",
-              "value": "5"
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
             }
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Divide – positive",
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "{{baseUrl}}/calculate/divide?a=10&b=2",
-          "host": [
-            "{{baseUrl}}"
           ],
-          "path": [
-            "calculate",
-            "divide"
-          ],
-          "query": [
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"a\": 10,\r\n  \"b\": 5,\r\n  \"operation\": \"add\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/calculations",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "calculations"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Calculation By ID",
+          "event": [
             {
-              "key": "a",
-              "value": "10"
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "const jsonData = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Calculation ID matches created ID\", function () {\r",
+                  "    pm.expect(jsonData.id).to.eql(\r",
+                  "        Number(pm.collectionVariables.get(\"calculationId\"))\r",
+                  "    );\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Result is 15\", function () {\r",
+                  "    pm.expect(jsonData.result).to.eql(15);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Operation is add\", function () {\r",
+                  "    pm.expect(jsonData.operation).to.eql(\"add\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"a is 10\", function () {\r",
+                  "    pm.expect(jsonData.a).to.eql(10);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"b is 5\", function () {\r",
+                  "    pm.expect(jsonData.b).to.eql(5);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
             },
             {
-              "key": "b",
-              "value": "2"
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
             }
-          ]
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/calculations/{{calculationId}}",
+              "protocol": "http",
+              "host": [
+                "127",
+                "0",
+                "0",
+                "1"
+              ],
+              "port": "8000",
+              "path": [
+                "calculations",
+                "{{calculationId}}"
+              ]
+            }
+          },
+          "response": []
         }
-      },
-      "response": []
+      ]
     },
     {
-      "name": "Divide – division by zero",
-      "event": [
+      "name": "Regression",
+      "item": [
         {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Status code is 400\", function () {\r",
-              "    pm.response.to.have.status(400);\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Correct error message\", function () {\r",
-              "    const jsonData = pm.response.json();\r",
-              "\r",
-              "    pm.expect(jsonData.detail)\r",
-              "        .to.eql(\"Division by zero is not allowed\");\r",
-              "});"
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
+          "name": "Wrong URL",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/healthxxx",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "healthxxx"
+              ]
+            }
+          },
+          "response": []
         },
         {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              ""
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        }
-      ],
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "{{baseUrl}}/calculate/divide?a=10&b=0",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "calculate",
-            "divide"
-          ],
-          "query": [
+          "name": "Add – positive",
+          "event": [
             {
-              "key": "a",
-              "value": "10"
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Result is 15\", function () {\r",
+                  "    const jsonData = pm.response.json();\r",
+                  "    pm.expect(jsonData.result).to.eql(15);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
             },
             {
-              "key": "b",
-              "value": "0"
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
             }
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Add - zero",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Status code is 200\", function () {\r",
-              "    pm.response.to.have.status(200);\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Result is 5\", function () {\r",
-              "    const jsonData = pm.response.json();\r",
-              "    pm.expect(jsonData.result).to.eql(5);\r",
-              "});"
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/calculate/add?a=10&b=5",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "calculate",
+                "add"
+              ],
+              "query": [
+                {
+                  "key": "a",
+                  "value": "10"
+                },
+                {
+                  "key": "b",
+                  "value": "5"
+                }
+              ]
+            }
+          },
+          "response": []
         },
         {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              ""
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        }
-      ],
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "{{baseUrl}}/calculate/add?a=0&b=5",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "calculate",
-            "add"
-          ],
-          "query": [
+          "name": "Add – invalid input",
+          "event": [
             {
-              "key": "a",
-              "value": "0"
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 422\", function () {\r",
+                  "    pm.response.to.have.status(422);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Validation error is returned\", function () {\r",
+                  "    const jsonData = pm.response.json();\r",
+                  "    pm.expect(jsonData.detail).to.be.an(\"array\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
             },
             {
-              "key": "b",
-              "value": "5"
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
             }
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Add - negative",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Status code is 200\", function () {\r",
-              "    pm.response.to.have.status(200);\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Result is -5\", function () {\r",
-              "    const jsonData = pm.response.json();\r",
-              "    pm.expect(jsonData.result).to.eql(-5);\r",
-              "});"
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/calculate/add?a=abc&b=5",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "calculate",
+                "add"
+              ],
+              "query": [
+                {
+                  "key": "a",
+                  "value": "abc"
+                },
+                {
+                  "key": "b",
+                  "value": "5"
+                }
+              ]
+            }
+          },
+          "response": []
         },
         {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              ""
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        }
-      ],
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "{{baseUrl}}/calculate/add?a=-10&b=5",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "calculate",
-            "add"
-          ],
-          "query": [
+          "name": "Divide – positive",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/calculate/divide?a=10&b=2",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "calculate",
+                "divide"
+              ],
+              "query": [
+                {
+                  "key": "a",
+                  "value": "10"
+                },
+                {
+                  "key": "b",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Divide – division by zero",
+          "event": [
             {
-              "key": "a",
-              "value": "-10"
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 400\", function () {\r",
+                  "    pm.response.to.have.status(400);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Correct error message\", function () {\r",
+                  "    const jsonData = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(jsonData.detail)\r",
+                  "        .to.eql(\"Division by zero is not allowed\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
             },
             {
-              "key": "b",
-              "value": "5"
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
             }
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Add - decimal",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Status code is 200\", function () {\r",
-              "    pm.response.to.have.status(200);\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Result is 4\", function () {\r",
-              "    const jsonData = pm.response.json();\r",
-              "    pm.expect(jsonData.result).to.eql(4);\r",
-              "});"
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/calculate/divide?a=10&b=0",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "calculate",
+                "divide"
+              ],
+              "query": [
+                {
+                  "key": "a",
+                  "value": "10"
+                },
+                {
+                  "key": "b",
+                  "value": "0"
+                }
+              ]
+            }
+          },
+          "response": []
         },
         {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              ""
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        }
-      ],
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "{{baseUrl}}/calculate/add?a=2.5&b=1.5",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "calculate",
-            "add"
-          ],
-          "query": [
+          "name": "Add - zero",
+          "event": [
             {
-              "key": "a",
-              "value": "2.5"
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Result is 5\", function () {\r",
+                  "    const jsonData = pm.response.json();\r",
+                  "    pm.expect(jsonData.result).to.eql(5);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
             },
             {
-              "key": "b",
-              "value": "1.5"
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
             }
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Happy path",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Status code is 201\", function () {\r",
-              "    pm.response.to.have.status(201);\r",
-              "});\r",
-              "\r",
-              "const jsonData = pm.response.json();\r",
-              "\r",
-              "pm.test(\"Result is 15\", function () {\r",
-              "    pm.expect(jsonData.result).to.eql(15);\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Operation is add\", function () {\r",
-              "    pm.expect(jsonData.operation).to.eql(\"add\");\r",
-              "});\r",
-              "\r",
-              "\r",
-              "pm.collectionVariables.set(\"calculationId\", jsonData.id);"
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        },
-        {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              ""
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        }
-      ],
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n  \"a\": 10,\r\n  \"b\": 5,\r\n  \"operation\": \"add\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/calculate/add?a=0&b=5",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "calculate",
+                "add"
+              ],
+              "query": [
+                {
+                  "key": "a",
+                  "value": "0"
+                },
+                {
+                  "key": "b",
+                  "value": "5"
+                }
+              ]
             }
-          }
-        },
-        "url": {
-          "raw": "{{baseUrl}}/calculations",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "calculations"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Invalid data type",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Status code is 422\", function () {\r",
-              "    pm.response.to.have.status(422);\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Validation error is returned\", function () {\r",
-              "    const jsonData = pm.response.json();\r",
-              "    pm.expect(jsonData.detail).to.be.an(\"array\");\r",
-              "});"
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
+          },
+          "response": []
         },
         {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              ""
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        }
-      ],
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n  \"a\": \"abc\",\r\n  \"b\": 5,\r\n  \"operation\": \"add\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
+          "name": "Add - negative",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Result is -5\", function () {\r",
+                  "    const jsonData = pm.response.json();\r",
+                  "    pm.expect(jsonData.result).to.eql(-5);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
             }
-          }
-        },
-        "url": {
-          "raw": "{{baseUrl}}/calculations",
-          "host": [
-            "{{baseUrl}}"
           ],
-          "path": [
-            "calculations"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Unsupported operation",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Status code is 400\", function () {\r",
-              "    pm.response.to.have.status(400);\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Correct error message\", function () {\r",
-              "    const jsonData = pm.response.json();\r",
-              "    pm.expect(jsonData.detail).to.eql(\"Unsupported operation\");\r",
-              "});"
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        },
-        {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              ""
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        }
-      ],
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n  \"a\": 10,\r\n  \"b\": 5,\r\n  \"operation\": \"multiply\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/calculate/add?a=-10&b=5",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "calculate",
+                "add"
+              ],
+              "query": [
+                {
+                  "key": "a",
+                  "value": "-10"
+                },
+                {
+                  "key": "b",
+                  "value": "5"
+                }
+              ]
             }
-          }
-        },
-        "url": {
-          "raw": "{{baseUrl}}/calculations",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "calculations"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Create Calculation - For GET",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Status code is 201\", function () {\r",
-              "    pm.response.to.have.status(201);\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Result is 15\", function () {\r",
-              "    const jsonData = pm.response.json();\r",
-              "    pm.expect(jsonData.result).to.eql(15);\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Operation is add\", function () {\r",
-              "    const jsonData = pm.response.json();\r",
-              "    pm.expect(jsonData.operation).to.eql(\"add\");\r",
-              "});\r",
-              "\r",
-              "const jsonData = pm.response.json();\r",
-              "pm.collectionVariables.set(\"calculationId\", jsonData.id);\r",
-              "\r",
-              "console.log(\"Created ID:\", jsonData.id);\r",
-              "console.log(\r",
-              "    \"Saved calculationId:\",\r",
-              "    pm.environment.get(\"calculationId\")\r",
-              ");"
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
+          },
+          "response": []
         },
         {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              ""
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        }
-      ],
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n  \"a\": 10,\r\n  \"b\": 5,\r\n  \"operation\": \"add\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
+          "name": "Add - decimal",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Result is 4\", function () {\r",
+                  "    const jsonData = pm.response.json();\r",
+                  "    pm.expect(jsonData.result).to.eql(4);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
             }
-          }
-        },
-        "url": {
-          "raw": "{{baseUrl}}/calculations",
-          "host": [
-            "{{baseUrl}}"
           ],
-          "path": [
-            "calculations"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Get Calculation By ID",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Status code is 200\", function () {\r",
-              "    pm.response.to.have.status(200);\r",
-              "});\r",
-              "\r",
-              "const jsonData = pm.response.json();\r",
-              "\r",
-              "pm.test(\"Calculation ID matches created ID\", function () {\r",
-              "    pm.expect(jsonData.id).to.eql(\r",
-              "        Number(pm.collectionVariables.get(\"calculationId\"))\r",
-              "    );\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Result is 15\", function () {\r",
-              "    pm.expect(jsonData.result).to.eql(15);\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Operation is add\", function () {\r",
-              "    pm.expect(jsonData.operation).to.eql(\"add\");\r",
-              "});\r",
-              "\r",
-              "pm.test(\"a is 10\", function () {\r",
-              "    pm.expect(jsonData.a).to.eql(10);\r",
-              "});\r",
-              "\r",
-              "pm.test(\"b is 5\", function () {\r",
-              "    pm.expect(jsonData.b).to.eql(5);\r",
-              "});"
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        },
-        {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              ""
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        }
-      ],
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "http://127.0.0.1:8000/calculations/{{calculationId}}",
-          "protocol": "http",
-          "host": [
-            "127",
-            "0",
-            "0",
-            "1"
-          ],
-          "port": "8000",
-          "path": [
-            "calculations",
-            "{{calculationId}}"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Get Calculation - Not Found",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Status code is 404\", function () {\r",
-              "    pm.response.to.have.status(404);\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Correct error message\", function () {\r",
-              "    const jsonData = pm.response.json();\r",
-              "    pm.expect(jsonData.detail).to.eql(\"Calculation not found\");\r",
-              "});"
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        },
-        {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              ""
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        }
-      ],
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "{{baseUrl}}/calculations/999",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "calculations",
-            "999"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Update Calculation",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Status code is 200\", function () {\r",
-              "    pm.response.to.have.status(200);\r",
-              "});\r",
-              "\r",
-              "const jsonData = pm.response.json();\r",
-              "\r",
-              "pm.test(\"Calculation ID matches created ID\", function () {\r",
-              "    pm.expect(jsonData.id).to.eql(\r",
-              "        Number(pm.collectionVariables.get(\"calculationId\"))\r",
-              "    );\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Updated result is 25\", function () {\r",
-              "    pm.expect(jsonData.result).to.eql(25);\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Updated a is 20\", function () {\r",
-              "    pm.expect(jsonData.a).to.eql(20);\r",
-              "});\r",
-              "\r",
-              "pm.test(\"b remains 5\", function () {\r",
-              "    pm.expect(jsonData.b).to.eql(5);\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Operation is add\", function () {\r",
-              "    pm.expect(jsonData.operation).to.eql(\"add\");\r",
-              "});"
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        },
-        {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              ""
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        }
-      ],
-      "request": {
-        "method": "PUT",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n  \"a\": 20,\r\n  \"b\": 5,\r\n  \"operation\": \"add\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/calculate/add?a=2.5&b=1.5",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "calculate",
+                "add"
+              ],
+              "query": [
+                {
+                  "key": "a",
+                  "value": "2.5"
+                },
+                {
+                  "key": "b",
+                  "value": "1.5"
+                }
+              ]
             }
-          }
-        },
-        "url": {
-          "raw": "{{baseUrl}}/calculations/{{calculationId}}",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "calculations",
-            "{{calculationId}}"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Update Calculation - Not Found",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Status code is 404\", function () {\r",
-              "    pm.response.to.have.status(404);\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Correct error message\", function () {\r",
-              "    const jsonData = pm.response.json();\r",
-              "    pm.expect(jsonData.detail).to.eql(\"Calculation not found\");\r",
-              "});"
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
+          },
+          "response": []
         },
         {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              ""
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        }
-      ],
-      "request": {
-        "method": "PUT",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n  \"a\": 20,\r\n  \"b\": 5,\r\n  \"operation\": \"add\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
+          "name": "Invalid data type",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 422\", function () {\r",
+                  "    pm.response.to.have.status(422);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Validation error is returned\", function () {\r",
+                  "    const jsonData = pm.response.json();\r",
+                  "    pm.expect(jsonData.detail).to.be.an(\"array\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
             }
-          }
-        },
-        "url": {
-          "raw": "{{baseUrl}}/calculations/999",
-          "host": [
-            "{{baseUrl}}"
           ],
-          "path": [
-            "calculations",
-            "999"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Update Calculation - Division by Zero",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Status code is 400\", function () {\r",
-              "    pm.response.to.have.status(400);\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Correct error message\", function () {\r",
-              "    const jsonData = pm.response.json();\r",
-              "    pm.expect(jsonData.detail).to.eql(\"Division by zero is not allowed\");\r",
-              "});"
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        },
-        {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              ""
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        }
-      ],
-      "request": {
-        "method": "PUT",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n  \"a\": 20,\r\n  \"b\": 0,\r\n  \"operation\": \"divide\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"a\": \"abc\",\r\n  \"b\": 5,\r\n  \"operation\": \"add\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/calculations",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "calculations"
+              ]
             }
-          }
-        },
-        "url": {
-          "raw": "{{baseUrl}}/calculations/{{calculationId}}",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "calculations",
-            "{{calculationId}}"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Update Calculation - Unsupported Operation",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Status code is 400\", function () {\r",
-              "    pm.response.to.have.status(400);\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Correct error message\", function () {\r",
-              "    const jsonData = pm.response.json();\r",
-              "    pm.expect(jsonData.detail).to.eql(\"Unsupported operation\");\r",
-              "});"
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
+          },
+          "response": []
         },
         {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              ""
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        }
-      ],
-      "request": {
-        "method": "PUT",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n  \"a\": 20,\r\n  \"b\": 5,\r\n  \"operation\": \"multiply\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
+          "name": "Unsupported operation",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 400\", function () {\r",
+                  "    pm.response.to.have.status(400);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Correct error message\", function () {\r",
+                  "    const jsonData = pm.response.json();\r",
+                  "    pm.expect(jsonData.detail).to.eql(\"Unsupported operation\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
             }
-          }
-        },
-        "url": {
-          "raw": "{{baseUrl}}/calculations/{{calculationId}}",
-          "host": [
-            "{{baseUrl}}"
           ],
-          "path": [
-            "calculations",
-            "{{calculationId}}"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Calculation After Update",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Status code is 200\", function () {\r",
-              "    pm.response.to.have.status(200);\r",
-              "});\r",
-              "\r",
-              "const jsonData = pm.response.json();\r",
-              "\r",
-              "pm.test(\"Calculation ID matches created ID\", function () {\r",
-              "    pm.expect(jsonData.id).to.eql(\r",
-              "        Number(pm.collectionVariables.get(\"calculationId\"))\r",
-              "    );\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Updated result is 25\", function () {\r",
-              "    pm.expect(jsonData.result).to.eql(25);\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Updated a is 20\", function () {\r",
-              "    pm.expect(jsonData.a).to.eql(20);\r",
-              "});\r",
-              "\r",
-              "pm.test(\"b remains 5\", function () {\r",
-              "    pm.expect(jsonData.b).to.eql(5);\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Operation is add\", function () {\r",
-              "    pm.expect(jsonData.operation).to.eql(\"add\");\r",
-              "});"
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        },
-        {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              ""
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        }
-      ],
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "{{baseUrl}}/calculations/{{calculationId}}",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "calculations",
-            "{{calculationId}}"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Partial Update - a",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Status code is 200\", function () {\r",
-              "    pm.response.to.have.status(200);\r",
-              "});\r",
-              "\r",
-              "const jsonData = pm.response.json();\r",
-              "\r",
-              "pm.test(\"Calculation ID matches created ID\", function () {\r",
-              "    pm.expect(jsonData.id).to.eql(\r",
-              "        Number(pm.collectionVariables.get(\"calculationId\"))\r",
-              "    );\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Updated a is 30\", function () {\r",
-              "    pm.expect(jsonData.a).to.eql(30);\r",
-              "});\r",
-              "\r",
-              "pm.test(\"b remains 5\", function () {\r",
-              "    pm.expect(jsonData.b).to.eql(5);\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Operation remains add\", function () {\r",
-              "    pm.expect(jsonData.operation).to.eql(\"add\");\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Updated result is 35\", function () {\r",
-              "    pm.expect(jsonData.result).to.eql(35);\r",
-              "});"
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        },
-        {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              ""
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        }
-      ],
-      "request": {
-        "method": "PATCH",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n  \"a\": 30\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"a\": 10,\r\n  \"b\": 5,\r\n  \"operation\": \"multiply\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/calculations",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "calculations"
+              ]
             }
-          }
-        },
-        "url": {
-          "raw": "{{baseUrl}}/calculations/{{calculationId}}",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "calculations",
-            "{{calculationId}}"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Create Calculation - For PATCH B",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Status code is 201\", function () {\r",
-              "    pm.response.to.have.status(201);\r",
-              "});\r",
-              "\r",
-              "const jsonData = pm.response.json();\r",
-              "\r",
-              "pm.collectionVariables.set(\"calculationId\", jsonData.id);"
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
+          },
+          "response": []
         },
         {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              ""
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        }
-      ],
-      "request": {
-        "method": "POST",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n  \"a\": 10,\r\n  \"b\": 5,\r\n  \"operation\": \"add\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
+          "name": "Create Calculation - For GET",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 201\", function () {\r",
+                  "    pm.response.to.have.status(201);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Result is 15\", function () {\r",
+                  "    const jsonData = pm.response.json();\r",
+                  "    pm.expect(jsonData.result).to.eql(15);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Operation is add\", function () {\r",
+                  "    const jsonData = pm.response.json();\r",
+                  "    pm.expect(jsonData.operation).to.eql(\"add\");\r",
+                  "});\r",
+                  "\r",
+                  "const jsonData = pm.response.json();\r",
+                  "pm.collectionVariables.set(\"calculationId\", jsonData.id);\r",
+                  "\r",
+                  "console.log(\"Created ID:\", jsonData.id);\r",
+                  "console.log(\r",
+                  "    \"Saved calculationId:\",\r",
+                  "    pm.environment.get(\"calculationId\")\r",
+                  ");"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
             }
-          }
-        },
-        "url": {
-          "raw": "{{baseUrl}}/calculations",
-          "host": [
-            "{{baseUrl}}"
           ],
-          "path": [
-            "calculations"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Partial Update B",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Status code is 200\", function () {\r",
-              "    pm.response.to.have.status(200);\r",
-              "});\r",
-              "\r",
-              "const jsonData = pm.response.json();\r",
-              "\r",
-              "pm.test(\"Calculation ID matches created ID\", function () {\r",
-              "    pm.expect(jsonData.id).to.eql(\r",
-              "        Number(pm.collectionVariables.get(\"calculationId\"))\r",
-              "    );\r",
-              "});\r",
-              "\r",
-              "pm.test(\"a remains 10\", function () {\r",
-              "    pm.expect(jsonData.a).to.eql(10);\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Updated b is 10\", function () {\r",
-              "    pm.expect(jsonData.b).to.eql(10);\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Operation remains add\", function () {\r",
-              "    pm.expect(jsonData.operation).to.eql(\"add\");\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Updated result is 20\", function () {\r",
-              "    pm.expect(jsonData.result).to.eql(20);\r",
-              "});"
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        },
-        {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              ""
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        }
-      ],
-      "request": {
-        "method": "PATCH",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n  \"b\": 10\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"a\": 10,\r\n  \"b\": 5,\r\n  \"operation\": \"add\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/calculations",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "calculations"
+              ]
             }
-          }
-        },
-        "url": {
-          "raw": "{{baseUrl}}/calculations/{{calculationId}}",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "calculations",
-            "{{calculationId}}"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Update A and B",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Status code is 200\", function () {\r",
-              "    pm.response.to.have.status(200);\r",
-              "});\r",
-              "\r",
-              "const jsonData = pm.response.json();\r",
-              "\r",
-              "pm.test(\"Calculation ID matches created ID\", function () {\r",
-              "    pm.expect(jsonData.id).to.eql(\r",
-              "        Number(pm.collectionVariables.get(\"calculationId\"))\r",
-              "    );\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Updated a is 20\", function () {\r",
-              "    pm.expect(jsonData.a).to.eql(20);\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Updated b is 4\", function () {\r",
-              "    pm.expect(jsonData.b).to.eql(4);\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Operation remains add\", function () {\r",
-              "    pm.expect(jsonData.operation).to.eql(\"add\");\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Updated result is 24\", function () {\r",
-              "    pm.expect(jsonData.result).to.eql(24);\r",
-              "});"
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
+          },
+          "response": []
         },
         {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              ""
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        }
-      ],
-      "request": {
-        "method": "PATCH",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n  \"a\": 20,\r\n  \"b\": 4\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
+          "name": "Get Calculation - Not Found",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 404\", function () {\r",
+                  "    pm.response.to.have.status(404);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Correct error message\", function () {\r",
+                  "    const jsonData = pm.response.json();\r",
+                  "    pm.expect(jsonData.detail).to.eql(\"Calculation not found\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
             }
-          }
-        },
-        "url": {
-          "raw": "{{baseUrl}}/calculations/{{calculationId}}",
-          "host": [
-            "{{baseUrl}}"
           ],
-          "path": [
-            "calculations",
-            "{{calculationId}}"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Update Operation",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Status code is 200\", function () {\r",
-              "    pm.response.to.have.status(200);\r",
-              "});\r",
-              "\r",
-              "const jsonData = pm.response.json();\r",
-              "\r",
-              "pm.test(\"Calculation ID matches created ID\", function () {\r",
-              "    pm.expect(jsonData.id).to.eql(\r",
-              "        Number(pm.collectionVariables.get(\"calculationId\"))\r",
-              "    );\r",
-              "});\r",
-              "\r",
-              "pm.test(\"a remains 20\", function () {\r",
-              "    pm.expect(jsonData.a).to.eql(20);\r",
-              "});\r",
-              "\r",
-              "pm.test(\"b remains 4\", function () {\r",
-              "    pm.expect(jsonData.b).to.eql(4);\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Operation changed to divide\", function () {\r",
-              "    pm.expect(jsonData.operation).to.eql(\"divide\");\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Result is 5\", function () {\r",
-              "    pm.expect(jsonData.result).to.eql(5);\r",
-              "});"
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        },
-        {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              ""
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        }
-      ],
-      "request": {
-        "method": "PATCH",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n  \"operation\": \"divide\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/calculations/999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "calculations",
+                "999"
+              ]
             }
-          }
-        },
-        "url": {
-          "raw": "{{baseUrl}}/calculations/{{calculationId}}",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "calculations",
-            "{{calculationId}}"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Division by Zero",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Status code is 400\", function () {\r",
-              "    pm.response.to.have.status(400);\r",
-              "});\r",
-              "\r",
-              "const jsonData = pm.response.json();\r",
-              "\r",
-              "pm.test(\"Correct error message\", function () {\r",
-              "    pm.expect(jsonData.detail).to.eql(\r",
-              "        \"Division by zero is not allowed\"\r",
-              "    );\r",
-              "});"
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
+          },
+          "response": []
         },
         {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              ""
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        }
-      ],
-      "request": {
-        "method": "PATCH",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n  \"operation\": \"divide\",\r\n  \"b\": 0\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
+          "name": "Update Calculation",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "const jsonData = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Calculation ID matches created ID\", function () {\r",
+                  "    pm.expect(jsonData.id).to.eql(\r",
+                  "        Number(pm.collectionVariables.get(\"calculationId\"))\r",
+                  "    );\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Updated result is 25\", function () {\r",
+                  "    pm.expect(jsonData.result).to.eql(25);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Updated a is 20\", function () {\r",
+                  "    pm.expect(jsonData.a).to.eql(20);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"b remains 5\", function () {\r",
+                  "    pm.expect(jsonData.b).to.eql(5);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Operation is add\", function () {\r",
+                  "    pm.expect(jsonData.operation).to.eql(\"add\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
             }
-          }
-        },
-        "url": {
-          "raw": "{{baseUrl}}/calculations/{{calculationId}}",
-          "host": [
-            "{{baseUrl}}"
           ],
-          "path": [
-            "calculations",
-            "{{calculationId}}"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Unsupported Operation",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Status code is 400\", function () {\r",
-              "    pm.response.to.have.status(400);\r",
-              "});\r",
-              "\r",
-              "const jsonData = pm.response.json();\r",
-              "\r",
-              "pm.test(\"Correct error message\", function () {\r",
-              "    pm.expect(jsonData.detail).to.eql(\r",
-              "        \"Unsupported operation\"\r",
-              "    );\r",
-              "});"
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        },
-        {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              ""
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        }
-      ],
-      "request": {
-        "method": "PATCH",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n  \"operation\": \"multiply\"\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"a\": 20,\r\n  \"b\": 5,\r\n  \"operation\": \"add\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/calculations/{{calculationId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "calculations",
+                "{{calculationId}}"
+              ]
             }
-          }
-        },
-        "url": {
-          "raw": "{{baseUrl}}/calculations/{{calculationId}}",
-          "host": [
-            "{{baseUrl}}"
-          ],
-          "path": [
-            "calculations",
-            "{{calculationId}}"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Non-existent Calculation",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Status code is 404\", function () {\r",
-              "    pm.response.to.have.status(404);\r",
-              "});\r",
-              "\r",
-              "const jsonData = pm.response.json();\r",
-              "\r",
-              "pm.test(\"Calculation not found\", function () {\r",
-              "    pm.expect(jsonData.detail).to.eql(\r",
-              "        \"Calculation not found\"\r",
-              "    );\r",
-              "});"
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
+          },
+          "response": []
         },
         {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              ""
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        }
-      ],
-      "request": {
-        "method": "PATCH",
-        "header": [],
-        "body": {
-          "mode": "raw",
-          "raw": "{\r\n  \"a\": 30\r\n}",
-          "options": {
-            "raw": {
-              "language": "json"
+          "name": "Update Calculation - Not Found",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 404\", function () {\r",
+                  "    pm.response.to.have.status(404);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Correct error message\", function () {\r",
+                  "    const jsonData = pm.response.json();\r",
+                  "    pm.expect(jsonData.detail).to.eql(\"Calculation not found\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
             }
-          }
-        },
-        "url": {
-          "raw": "{{baseUrl}}/calculations/999999",
-          "host": [
-            "{{baseUrl}}"
           ],
-          "path": [
-            "calculations",
-            "999999"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Delete Calculation",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Status code is 204\", function () {\r",
-              "    pm.response.to.have.status(204);\r",
-              "});"
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"a\": 20,\r\n  \"b\": 5,\r\n  \"operation\": \"add\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/calculations/999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "calculations",
+                "999"
+              ]
+            }
+          },
+          "response": []
         },
         {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              ""
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        }
-      ],
-      "request": {
-        "method": "DELETE",
-        "header": [],
-        "url": {
-          "raw": "{{baseUrl}}/calculations/{{calculationId}}",
-          "host": [
-            "{{baseUrl}}"
+          "name": "Update Calculation - Division by Zero",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 400\", function () {\r",
+                  "    pm.response.to.have.status(400);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Correct error message\", function () {\r",
+                  "    const jsonData = pm.response.json();\r",
+                  "    pm.expect(jsonData.detail).to.eql(\"Division by zero is not allowed\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
           ],
-          "path": [
-            "calculations",
-            "{{calculationId}}"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Negative delete",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Status code is 404\", function () {\r",
-              "    pm.response.to.have.status(404);\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Correct error message\", function () {\r",
-              "    const jsonData = pm.response.json();\r",
-              "    pm.expect(jsonData.detail).to.eql(\"Calculation not found\");\r",
-              "});"
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"a\": 20,\r\n  \"b\": 0,\r\n  \"operation\": \"divide\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/calculations/{{calculationId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "calculations",
+                "{{calculationId}}"
+              ]
+            }
+          },
+          "response": []
         },
         {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              ""
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        }
-      ],
-      "request": {
-        "method": "DELETE",
-        "header": [],
-        "url": {
-          "raw": "{{baseUrl}}/calculations/999",
-          "host": [
-            "{{baseUrl}}"
+          "name": "Update Calculation - Unsupported Operation",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 400\", function () {\r",
+                  "    pm.response.to.have.status(400);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Correct error message\", function () {\r",
+                  "    const jsonData = pm.response.json();\r",
+                  "    pm.expect(jsonData.detail).to.eql(\"Unsupported operation\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
           ],
-          "path": [
-            "calculations",
-            "999"
-          ]
-        }
-      },
-      "response": []
-    },
-    {
-      "name": "Get Calculation After Delete",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Status code is 404\", function () {\r",
-              "    pm.response.to.have.status(404);\r",
-              "});\r",
-              "\r",
-              "pm.test(\"Correct error message\", function () {\r",
-              "    const jsonData = pm.response.json();\r",
-              "    pm.expect(jsonData.detail).to.eql(\"Calculation not found\");\r",
-              "});"
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"a\": 20,\r\n  \"b\": 5,\r\n  \"operation\": \"multiply\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/calculations/{{calculationId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "calculations",
+                "{{calculationId}}"
+              ]
+            }
+          },
+          "response": []
         },
         {
-          "listen": "prerequest",
-          "script": {
-            "exec": [
-              ""
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        }
-      ],
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "{{baseUrl}}/calculations/{{calculationId}}",
-          "host": [
-            "{{baseUrl}}"
+          "name": "Calculation After Update",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "const jsonData = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Calculation ID matches created ID\", function () {\r",
+                  "    pm.expect(jsonData.id).to.eql(\r",
+                  "        Number(pm.collectionVariables.get(\"calculationId\"))\r",
+                  "    );\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Updated result is 25\", function () {\r",
+                  "    pm.expect(jsonData.result).to.eql(25);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Updated a is 20\", function () {\r",
+                  "    pm.expect(jsonData.a).to.eql(20);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"b remains 5\", function () {\r",
+                  "    pm.expect(jsonData.b).to.eql(5);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Operation is add\", function () {\r",
+                  "    pm.expect(jsonData.operation).to.eql(\"add\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
           ],
-          "path": [
-            "calculations",
-            "{{calculationId}}"
-          ]
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/calculations/{{calculationId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "calculations",
+                "{{calculationId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Partial Update - a",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "const jsonData = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Calculation ID matches created ID\", function () {\r",
+                  "    pm.expect(jsonData.id).to.eql(\r",
+                  "        Number(pm.collectionVariables.get(\"calculationId\"))\r",
+                  "    );\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Updated a is 30\", function () {\r",
+                  "    pm.expect(jsonData.a).to.eql(30);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"b remains 5\", function () {\r",
+                  "    pm.expect(jsonData.b).to.eql(5);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Operation remains add\", function () {\r",
+                  "    pm.expect(jsonData.operation).to.eql(\"add\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Updated result is 35\", function () {\r",
+                  "    pm.expect(jsonData.result).to.eql(35);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"a\": 30\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/calculations/{{calculationId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "calculations",
+                "{{calculationId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Calculation - For PATCH B",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 201\", function () {\r",
+                  "    pm.response.to.have.status(201);\r",
+                  "});\r",
+                  "\r",
+                  "const jsonData = pm.response.json();\r",
+                  "\r",
+                  "pm.collectionVariables.set(\"calculationId\", jsonData.id);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"a\": 10,\r\n  \"b\": 5,\r\n  \"operation\": \"add\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/calculations",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "calculations"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Partial Update B",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "const jsonData = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Calculation ID matches created ID\", function () {\r",
+                  "    pm.expect(jsonData.id).to.eql(\r",
+                  "        Number(pm.collectionVariables.get(\"calculationId\"))\r",
+                  "    );\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"a remains 10\", function () {\r",
+                  "    pm.expect(jsonData.a).to.eql(10);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Updated b is 10\", function () {\r",
+                  "    pm.expect(jsonData.b).to.eql(10);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Operation remains add\", function () {\r",
+                  "    pm.expect(jsonData.operation).to.eql(\"add\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Updated result is 20\", function () {\r",
+                  "    pm.expect(jsonData.result).to.eql(20);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"b\": 10\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/calculations/{{calculationId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "calculations",
+                "{{calculationId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update A and B",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "const jsonData = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Calculation ID matches created ID\", function () {\r",
+                  "    pm.expect(jsonData.id).to.eql(\r",
+                  "        Number(pm.collectionVariables.get(\"calculationId\"))\r",
+                  "    );\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Updated a is 20\", function () {\r",
+                  "    pm.expect(jsonData.a).to.eql(20);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Updated b is 4\", function () {\r",
+                  "    pm.expect(jsonData.b).to.eql(4);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Operation remains add\", function () {\r",
+                  "    pm.expect(jsonData.operation).to.eql(\"add\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Updated result is 24\", function () {\r",
+                  "    pm.expect(jsonData.result).to.eql(24);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"a\": 20,\r\n  \"b\": 4\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/calculations/{{calculationId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "calculations",
+                "{{calculationId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Operation",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "const jsonData = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Calculation ID matches created ID\", function () {\r",
+                  "    pm.expect(jsonData.id).to.eql(\r",
+                  "        Number(pm.collectionVariables.get(\"calculationId\"))\r",
+                  "    );\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"a remains 20\", function () {\r",
+                  "    pm.expect(jsonData.a).to.eql(20);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"b remains 4\", function () {\r",
+                  "    pm.expect(jsonData.b).to.eql(4);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Operation changed to divide\", function () {\r",
+                  "    pm.expect(jsonData.operation).to.eql(\"divide\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Result is 5\", function () {\r",
+                  "    pm.expect(jsonData.result).to.eql(5);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"operation\": \"divide\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/calculations/{{calculationId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "calculations",
+                "{{calculationId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Division by Zero",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 400\", function () {\r",
+                  "    pm.response.to.have.status(400);\r",
+                  "});\r",
+                  "\r",
+                  "const jsonData = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Correct error message\", function () {\r",
+                  "    pm.expect(jsonData.detail).to.eql(\r",
+                  "        \"Division by zero is not allowed\"\r",
+                  "    );\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"operation\": \"divide\",\r\n  \"b\": 0\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/calculations/{{calculationId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "calculations",
+                "{{calculationId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Unsupported Operation",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 400\", function () {\r",
+                  "    pm.response.to.have.status(400);\r",
+                  "});\r",
+                  "\r",
+                  "const jsonData = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Correct error message\", function () {\r",
+                  "    pm.expect(jsonData.detail).to.eql(\r",
+                  "        \"Unsupported operation\"\r",
+                  "    );\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"operation\": \"multiply\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/calculations/{{calculationId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "calculations",
+                "{{calculationId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Non-existent Calculation",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 404\", function () {\r",
+                  "    pm.response.to.have.status(404);\r",
+                  "});\r",
+                  "\r",
+                  "const jsonData = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Calculation not found\", function () {\r",
+                  "    pm.expect(jsonData.detail).to.eql(\r",
+                  "        \"Calculation not found\"\r",
+                  "    );\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"a\": 30\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/calculations/999999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "calculations",
+                "999999"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Calculation",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 204\", function () {\r",
+                  "    pm.response.to.have.status(204);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/calculations/{{calculationId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "calculations",
+                "{{calculationId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Negative delete",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 404\", function () {\r",
+                  "    pm.response.to.have.status(404);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Correct error message\", function () {\r",
+                  "    const jsonData = pm.response.json();\r",
+                  "    pm.expect(jsonData.detail).to.eql(\"Calculation not found\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/calculations/999",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "calculations",
+                "999"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Calculation After Delete",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 404\", function () {\r",
+                  "    pm.response.to.have.status(404);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Correct error message\", function () {\r",
+                  "    const jsonData = pm.response.json();\r",
+                  "    pm.expect(jsonData.detail).to.eql(\"Calculation not found\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/calculations/{{calculationId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "calculations",
+                "{{calculationId}}"
+              ]
+            }
+          },
+          "response": []
         }
-      },
-      "response": []
+      ]
     }
   ],
   "event": [
@@ -1864,10 +1874,6 @@
   "variable": [
     {
       "key": "calculationId",
-      "value": ""
-    },
-    {
-      "key": "baseUrl",
       "value": ""
     }
   ]

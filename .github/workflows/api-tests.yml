@@ -55,14 +55,23 @@ jobs:
           echo "=== FastAPI health check ==="
           curl --fail --retry 10 --retry-delay 1 http://127.0.0.1:8000/health
 
-          echo "=== Running main Newman tests ==="
+          echo "=== Running Smoke tests ==="
           newman run tests/Calculator_API_Tests.postman_collection.json \
             -e environments/Test_Environment.postman_environment.json \
+            --folder Smoke \
             -r cli,htmlextra \
-            --reporter-htmlextra-export reports/main-api-report.html \
+            --reporter-htmlextra-export reports/smoke-report.html \
             --bail
 
-          echo "=== Running data-driven Newman tests ==="
+          echo "=== Running Regression tests ==="
+          newman run tests/Calculator_API_Tests.postman_collection.json \
+            -e environments/Test_Environment.postman_environment.json \
+            --folder Regression \
+            -r cli,htmlextra \
+            --reporter-htmlextra-export reports/regression-report.html \
+            --bail
+
+          echo "=== Running Data-driven tests ==="
           newman run tests/Calculator_Data_Driven_Tests.postman_collection.json \
             -e environments/Test_Environment.postman_environment.json \
             -d data/add-test-data.csv \
