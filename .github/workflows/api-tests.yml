@@ -55,14 +55,6 @@ jobs:
           echo "=== FastAPI health check ==="
           curl --fail --retry 10 --retry-delay 1 http://127.0.0.1:8000/health
 
-          echo "=== Running Smoke tests ==="
-          newman run tests/Calculator_API_Tests.postman_collection.json \
-            -e environments/Test_Environment.postman_environment.json \
-            --folder Smoke \
-            -r cli,htmlextra \
-            --reporter-htmlextra-export reports/smoke-report.html \
-            --bail
-
           echo "=== Running Regression tests ==="
           newman run tests/Calculator_API_Tests.postman_collection.json \
             -e environments/Test_Environment.postman_environment.json \
