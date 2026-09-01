@@ -33,7 +33,7 @@ def divide(a: float, b: float):
             status_code=400,
             detail="Division by zero is not allowed"
         )
-
+    
     return {"result": a / b}
 
 
@@ -50,7 +50,7 @@ def create_calculation(calculation: CalculationRequest):
                 status_code=400,
                 detail="Division by zero is not allowed"
             )
-
+        
     else:
         raise HTTPException(
             status_code=400,
